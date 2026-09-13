@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1"
+  >
+
+  <title>
+    Happy Vinayaka Chaturthi — Ganpati Bappa Morya
+  </title>
+
+  <meta
+    name="description"
+    content="A divine cinematic Vinayaka Chaturthi greeting from N R JITENDAR REDDY."
+  >
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Noto+Serif+Devanagari:wght@500;700&family=Marcellus&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+  <!-- =========================================================
+       TELUGU GANESHA DEVOTIONAL MUSIC
+       ========================================================= -->
+
+  <audio
+    id="ganeshaMusic"
+    preload="auto"
+    autoplay
+    loop
+  >
+    <source
+      src="audio/ganesha-music.mpeg"
+      type="audio/mpeg"
+    >
+  </audio>
+
+
+  <!-- =========================================================
+       MUSIC CONTROL
+       ========================================================= -->
+
+  <button
+    class="music-toggle"
+    id="musicToggle"
+    type="button"
+    aria-label="Toggle devotional music"
+    aria-pressed="false"
+  >
+    <span class="music-icon">♫</span>
+    <span id="musicLabel">Music Off</span>
+  </button>
+
+
+  <!-- =========================================================
+       BACKGROUND CANVAS
+       ========================================================= -->
+
+  <canvas id="bg-canvas"></canvas>
+
+
+  <!-- =========================================================
+       MAIN STAGE
+       ========================================================= -->
+
+  <div
+    class="stage"
+    id="stage"
+  >
+
+    <!-- Ambient temple glow -->
+    <div class="temple-glow"></div>
+
+
+    <!-- Falling petals -->
+    <div
+      class="petal-field"
+      id="petalField"
+      aria-hidden="true"
+    ></div>
+
+
+    <!-- Decorative borders -->
+    <div
+      class="border-vine border-vine--top"
+      aria-hidden="true"
+    ></div>
+
+    <div
+      class="border-vine border-vine--bottom"
+      aria-hidden="true"
+    ></div>
+
+
+    <!-- =======================================================
+         LEFT DIYA
+         ======================================================= -->
+
+    <div
+      class="diya diya--left"
+      id="diyaLeft"
+      aria-hidden="true"
+    >
+
+      <svg
+        viewBox="0 0 120 160"
+        class="diya-svg"
+      >
+
+        <ellipse
+          cx="60"
+          cy="132"
+          rx="46"
+          ry="14"
+          class="diya-shadow"
+        />
+
+        <path
+          d="M14 118 C14 150 106 150 106 118 C106 100 92 96 60 96 C28 96 14 100 14 118Z"
+          class="diya-body"
+        />
+
+        <path
+          d="M14 118 C14 128 106 128 106 118"
+          class="diya-rim"
+        />
+
+        <ellipse
+          cx="60"
+          cy="108"
+          rx="18"
+          ry="6"
+          class="diya-oil"
+        />
+
+        <g class="flame-group">
+
+          <path
+            class="flame-outer"
+            d="M60 100 C50 84 52 66 60 52 C68 66 70 84 60 100Z"
+          />
+
+          <path
+            class="flame-inner"
+            d="M60 96 C54 84 55 72 60 62 C65 72 66 84 60 96Z"
+          />
+
+        </g>
+
+      </svg>
+
+      <div class="diya-light"></div>
+
+    </div>
+
+
+    <!-- =======================================================
+         RIGHT DIYA
+         ======================================================= -->
+
+    <div
+      class="diya diya--right"
+      id="diyaRight"
+      aria-hidden="true"
+    >
+
+      <svg
+        viewBox="0 0 120 160"
+        class="diya-svg"
+      >
+
+        <ellipse
+          cx="60"
+          cy="132"
+          rx="46"
+          ry="14"
+          class="diya-shadow"
+        />
+
+        <path
+          d="M14 118 C14 150 106 150 106 118 C106 100 92 96 60 96 C28 96 14 100 14 118Z"
+          class="diya-body"
+        />
+
+        <path
+          d="M14 118 C14 128 106 128 106 118"
+          class="diya-rim"
+        />
+
+        <ellipse
+          cx="60"
+          cy="108"
+          rx="18"
+          ry="6"
+          class="diya-oil"
+        />
+
+        <g class="flame-group">
+
+          <path
+            class="flame-outer"
+            d="M60 100 C50 84 52 66 60 52 C68 66 70 84 60 100Z"
+          />
+
+          <path
+            class="flame-inner"
+            d="M60 96 C54 84 55 72 60 62 C65 72 66 84 60 96Z"
+          />
+
+        </g>
+
+      </svg>
+
+      <div class="diya-light"></div>
+
+    </div>
+
+
+    <!-- =======================================================
+         MAIN SANCTUM
+         ======================================================= -->
+
+    <main
+      class="sanctum"
+      id="sanctum"
+    >
+
+      <!-- Aura -->
+      <div
+        class="aura-ring aura-ring--1"
+        aria-hidden="true"
+      ></div>
+
+      <div
+        class="aura-ring aura-ring--2"
+        aria-hidden="true"
+      ></div>
+
+      <!-- Light rays -->
+      <div
+        class="light-rays"
+        aria-hidden="true"
+      ></div>
+
+
+      <!-- =====================================================
+           LORD GANESHA
+           ===================================================== -->
+
+      <div
+        class="ganesha-wrap"
+        id="ganeshaWrap"
+      >
+
+        <div
+          class="ganesha-parallax"
+          id="ganeshaParallax"
+        >
+
+          <div
+            class="ganesha-glow"
+            aria-hidden="true"
+          ></div>
+
+          <img
+            src="images/ganesha-1.png"
+            alt="Lord Ganesha"
+            class="ganesha-img"
+            id="ganeshaImg"
+          >
+
+        </div>
+
+      </div>
+
+
+      <!-- =====================================================
+           RANGOLI
+           ===================================================== -->
+
+      <svg
+        class="rangoli"
+        id="rangoli"
+        viewBox="0 0 400 400"
+        aria-hidden="true"
+      >
+
+        <g
+          id="rangoliPaths"
+          fill="none"
+          stroke-linecap="round"
+        >
+
+          <circle
+            cx="200"
+            cy="200"
+            r="150"
+            class="rangoli-path"
+          />
+
+          <circle
+            cx="200"
+            cy="200"
+            r="112"
+            class="rangoli-path"
+          />
+
+          <circle
+            cx="200"
+            cy="200"
+            r="74"
+            class="rangoli-path"
+          />
+
+          <g class="rangoli-petals"></g>
+
+        </g>
+
+      </svg>
+
+
+      <!-- =====================================================
+           GREETING
+           ===================================================== -->
+
+      <div class="devotion-text">
+
+        <p
+          class="mantra"
+          id="mantra"
+        >
+          ॥ श्री गणेशाय नमः ॥
+        </p>
+
+
+        <h1
+          class="headline"
+          id="headline"
+        >
+
+          <span class="headline-word">
+            Happy
+          </span>
+
+          <span class="headline-word headline-word--accent">
+            Vinayaka Chaturthi
+          </span>
+
+        </h1>
+
+
+        <p
+          class="blessing"
+          id="blessing"
+        >
+          May Lord Ganesha bless you and your family
+          with happiness, prosperity, success &amp;
+          good fortune.
+        </p>
+
+
+        <p
+          class="subline"
+          id="subline"
+        >
+          Wishing you a blessed and joyful
+          Vinayaka Chaturthi 🙏
+        </p>
+
+
+        <!-- Music hint -->
+        <p
+          class="music-hint"
+          id="musicHint"
+        >
+          🎵 Telugu devotional music
+        </p>
+
+
+        <!-- ===================================================
+             BUTTONS
+             =================================================== -->
+
+        <div
+          class="cta-row"
+          id="ctaRow"
+        >
+
+          <button
+            class="btn btn--primary"
+            id="beginBtn"
+            type="button"
+          >
+            Begin Celebration
+          </button>
+
+          <button
+            class="btn btn--ghost"
+            id="shareBtn"
+            type="button"
+          >
+            Share Wishes
+          </button>
+
+        </div>
+
+
+        <!-- Final message -->
+        <p
+          class="final-message"
+          id="finalMessage"
+          aria-live="polite"
+        >
+          Ganpati Bappa Morya! 🙏🐘
+        </p>
+
+      </div>
+
+    </main>
+
+
+    <!-- =======================================================
+         PETAL BURST
+         ======================================================= -->
+
+    <div
+      class="petal-burst"
+      id="petalBurst"
+      aria-hidden="true"
+    ></div>
+
+
+    <!-- =======================================================
+         GANESHA GALLERY
+         ======================================================= -->
+
+    <section class="ganesha-gallery">
+
+      <div class="gallery-title">
+
+        <span>✦</span>
+
+        Divine Blessings
+
+        <span>✦</span>
+
+      </div>
+
+
+      <div class="gallery-images">
+
+
+        <div class="gallery-card">
+
+          <div class="gallery-glow"></div>
+
+          <img
+            src="images/ganesha-1.png"
+            alt="Lord Ganesha"
+            loading="lazy"
+          >
+
+        </div>
+
+
+        <div class="gallery-card">
+
+          <div class="gallery-glow"></div>
+
+          <img
+            src="images/ganesha-2.png"
+            alt="Lord Ganesha"
+            loading="lazy"
+          >
+
+        </div>
+
+
+        <div class="gallery-card">
+
+          <div class="gallery-glow"></div>
+
+          <img
+            src="images/ganesha-3.png"
+            alt="Lord Ganesha"
+            loading="lazy"
+          >
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         PERSONAL SIGNATURE
+         ======================================================= -->
+
+    <footer class="signature">
+
+      <div class="signature-line"></div>
+
+
+      <p class="blessed-text">
+        With Divine Blessings
+      </p>
+
+
+      <h2>
+        N R JITENDAR REDDY
+      </h2>
+
+
+      <div class="signature-ornament">
+        ✦ ॐ ✦
+      </div>
+
+
+      <p class="signature-message">
+        Ganpati Bappa Morya! 🙏
+      </p>
+
+    </footer>
+
+
+  </div>
+
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+
+</body>
+
+</html>
